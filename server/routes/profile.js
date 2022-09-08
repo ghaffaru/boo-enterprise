@@ -3,6 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
+const profileValidators = require('../validations/profileValidators');
+
+const profileController = require('../controllers/profileController');
+
+
 const profiles = [
   {
     "id": 1,
@@ -21,11 +26,15 @@ const profiles = [
 
 module.exports = function() {
 
-  router.get('/*', function(req, res, next) {
+  router.get('/:id', async function(req, res, next) {
+
     res.render('profile_template', {
       profile: profiles[0],
     });
   });
+
+  router.post('/create',profileValidators.createNewProfile, profileController.newProfile)
+  router.get('/', profileController.allProfiles);
 
   return router;
 }
