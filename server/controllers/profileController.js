@@ -12,6 +12,7 @@ exports.newProfile = async (req, res) => {
             socionics: req.body.socionics,
             sloan: req.body.sloan,
             psyche: req.body.psyche,
+            temperaments: req.body.temperaments,
             image: 'https://soulverse.boo.world/images/1.png'
         });
 
@@ -29,7 +30,7 @@ exports.allProfiles = async (req, res) => {
         const profiles = await Profile.find();
 
         return res.status(200).json(profiles);
-        
+
     } catch(err) {
         return res.status(400).json({error: err.message});
     }

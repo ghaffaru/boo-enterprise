@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 
 // routes
 app.use('/profile', require('./routes/profile')());
+app.use('/comment', require('./routes/comment')());
 
 // start server
 const server = app.listen(port);

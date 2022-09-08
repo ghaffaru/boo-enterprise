@@ -6,6 +6,7 @@ const router = express.Router();
 const profileValidators = require('../validations/profileValidators');
 
 const profileController = require('../controllers/profileController');
+const Profile = require('../models/Profile');
 
 
 const profiles = [
@@ -27,9 +28,14 @@ const profiles = [
 module.exports = function() {
 
   router.get('/:id', async function(req, res, next) {
+    
+    const profile = await Profile.findById(req.params.id);
 
+    if (!profile) {
+      return res.status(404).json({message: 'Profile not found!'});
+    }
     res.render('profile_template', {
-      profile: profiles[0],
+      profile: profile,
     });
   });
 
