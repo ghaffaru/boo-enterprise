@@ -12,3 +12,17 @@ exports.createComment =  [
         returnErrors(validationResult(req), res, next);
     }
 ]
+
+exports.likeOrUnlike = [
+
+    body('commentId').notEmpty().withMessage('Comment Id is required'),
+
+    body('action').notEmpty().withMessage('Action field is required'),
+
+    body('action').isIn(['like', 'unlike']).withMessage('Action can be like or unlike'),
+    
+    (req, res, next) => {
+        returnErrors(validationResult(req), res, next);
+    }
+
+]
