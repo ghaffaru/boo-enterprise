@@ -90,3 +90,23 @@ exports.sortComments = async (req, res) => {
         return res.status(400).json({error: err.message});
     }
 }
+
+exports.filterComments = async (req,res) => {
+    try {
+        const commentToProfile = await Profile.findById(req.params.profileId);
+
+        if (!commentToProfile) {
+            return res.status(404).json({message: 'Profile does not exist!'});
+        }
+
+        const comments = await Comment.find({
+            commentTo: req.params.profileId,
+            voteOptions: req.params.personality
+        })
+
+        return res.status(200).json(comments);
+
+    } catch (err) {
+        return res.status(400).json({error: err.message});
+    }
+}

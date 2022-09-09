@@ -14,6 +14,8 @@ module.exports = function() {
     router.get('/:profileId/profile', commentController.commentsForProfile);
     
     router.get('/:profileId/sort/:sortBy', commentController.sortComments);
+
+    router.get('/:profileId/filter/:personality', commentController.filterComments);
     
     return router;
 }
